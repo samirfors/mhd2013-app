@@ -1,11 +1,12 @@
-var APP =  {}
+var Event =  {}
 
-APP.data = {};
+Event.data = {};
+Event.users = {};
 
-APP.init = function() {
+Event.init = function() {
     var sp = getSpotifyApi();
     var auth = sp.require('$api/auth');
-
+    console.log("Here!")
     var app_id = '465881243471710';
     var permissions = ['user_actions.music'];
     var request_url = 'https://graph.facebook.com/events';
@@ -18,23 +19,29 @@ APP.init = function() {
             xhr.onreadystatechange = function () {
                 if (xhr.readyState != 4) return;
                 var response = JSON.parse(xhr.responseText);
-                APP.data = response.data;
-                return response.data;
+                Event.data = response.data;
             }
             xhr.send(null);
         },
         onFailure : function(error) {
             console.log('Authentication failed with error: ' + error);
-            return {};
         },
         onComplete : function() { }
     });
-} 
+}
 
-
-APP.getUsers = fuction(eventID){
+Event.getUsers = function(eventID){
     var users  = [];
-    
-        
-    return users;
+    var eventData = {};
+    if (Event.data == {})
+        return {};
+    console.log(Event.data)
+    Event.data.forEach(function(fbEvent){
+        if (fbEvent.id ==  eventID) {
+            eventData = fbEvent;
+            Event.users = eventData.attending.data;
+            return Event.users;
+        }
+    })
+    return {};
 }
