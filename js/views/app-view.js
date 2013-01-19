@@ -12,7 +12,9 @@ function(Backbone,$,_,listTpl) {
       body : $('body')
     },
 
-    events: {},
+    events: {
+      'click #fb-login': 'login'
+    },
 
     initialize: function(options) {
       _.bindAll(this);
@@ -24,6 +26,15 @@ function(Backbone,$,_,listTpl) {
       $(tpl({
         list: 'hej'
       })).appendTo(this.elems.body);
+    },
+
+    login: function(e){
+
+
+
+      console.log('LOGIN');
+
+
     }
 
   });
