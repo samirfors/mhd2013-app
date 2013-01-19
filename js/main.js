@@ -1,4 +1,4 @@
-require.config({
+requirejs.config({
   paths: {
     'underscore': 'libs/underscore/underscore-min',
     'backbone'  : 'libs/backbone/backbone-min',
@@ -18,7 +18,7 @@ require.config({
   }
 });
 
-require([
+requirejs([
   'app'
   // 'js/libs/css3-mediaqueries/css3-mediaqueries.js',
   // 'js/libs/google-analytics/googleanalytics.js'
