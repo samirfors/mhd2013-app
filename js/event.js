@@ -8,7 +8,7 @@ window.Fucker.model = {events:{}};
 window.Fucker.init = function() {
     var sp = getSpotifyApi();
     var auth = sp.require('$api/auth');
-    console.log("Here!")
+
     var app_id = '465881243471710';
     var permissions = ['user_actions.music','user_events'];
     var request_url = 'https://graph.facebook.com/events';
@@ -30,7 +30,7 @@ window.Fucker.init = function() {
               /*  for(var i = 0; i < response.data.length; i++)
                 {
                     console.log(response.data[0].attending)
-                    
+
                 }*/
             }
             xhr.send(null);

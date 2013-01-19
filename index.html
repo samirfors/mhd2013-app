@@ -1,8 +1,20 @@
 <html>
 <head>
 	<title>TEST!</title>
+  <link rel="stylesheet" href="css/app.css">
 </head>
 <body>
+
+  <script id="events-list-tpl" type="text/x-handlebars-template">
+    <div class="{{id}}">
+      <img src="{{picture}}">
+      <p>{{name}}</p>
+      <p>
+        <span>{{date}}</span>
+        <span>start date</span>
+      </p>
+  </script>
+
 	<p>Let's get this party started!</p>
 
   <button id="fb-login">Login with facebook</button>
@@ -15,11 +27,11 @@
   <script src="/js/vendor/bootstrap.js"></script>
   <script src="/js/vendor/underscore-min.js"></script>
   <script src="/js/vendor/jquery-min.js"></script>
+  <script src="/js/vendor/handlebars.js"></script>
   <script src="/js/event.js"></script>
   <script src="/js/render.js"></script>
   <script>
     $('#fb-login').click(window.Fucker.init);
   </script>
-  <!--<script data-main="/js/main" src="/js/libs/require/require.js"></script>-->
 </body>
 </html>
