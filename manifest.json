@@ -20,10 +20,9 @@
 		}
 	],
 	"Dependencies": {
-	  "api": "0.2.3",
-	  "util": "0.1.0",
-	  "resources": "0.2.2"
-  },
+        "api": "1.10.2",
+        "views": "1.18.1"
+    },
 	"RequiredInterface": 1,
 	"SupportedLanguages": [
 		"en"
