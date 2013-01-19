@@ -14,7 +14,6 @@ function(Event) {
 
     makeLogin: function() {
       console.log('try login');
-      window.Fucker.init();
     }
   });
 
