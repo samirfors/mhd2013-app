@@ -31,7 +31,7 @@ window.Fucker.init = function() {
                 for(var i = 0; i < response.data.length; i++)
                 {
                     console.log(response.data[0])
-                    var newEvent = {
+              //      var newEvent = {
 
 
                 }
