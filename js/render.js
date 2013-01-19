@@ -18,7 +18,7 @@ window.Render.eventsList = function(events) {
     return date;
   }
 
-  _.each(events, function(event) {
+  _.each(events, function(event, index) {
     console.log(event);
     var source = $('#events-list-tpl').html();
     var template = Handlebars.compile(source);
@@ -29,6 +29,7 @@ window.Render.eventsList = function(events) {
     var data = {
       name: event.name,
       id: event.id,
+      index: index,
       picture: event.picture.data.url,
       date: date[0],
       time: date[1]
