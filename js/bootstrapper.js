@@ -1,9 +1,10 @@
 define([
   'backbone',
   'underscore',
-  'views/app-view'
+  'views/app-view',
+  'collections/event_collection'
 ],
-function(Backbone, _, AppView) {
+function(Backbone, _, AppView, EventCollection) {
   'use strict';
 
   var console = window.console,
@@ -17,9 +18,13 @@ function(Backbone, _, AppView) {
 
       console.log(this.eventHub);
 
+      this.events = new EventCollection();
+
+      console.log("yeayea" + this.events);
+
       this.view = new AppView({
         eventHub: this.eventHub
-      });
+      })
 
     }
 
