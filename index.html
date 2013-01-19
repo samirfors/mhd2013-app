@@ -6,7 +6,7 @@
 <body>
 
   <script id="events-list-tpl" type="text/x-handlebars-template">
-    <div class="{{id}}">
+    <div data-id="{{id}}" data-index="{{index}}" class="event">
       <img src="{{picture}}">
       <p>{{name}}</p>
       <p>
@@ -24,9 +24,9 @@
     <ul></ul>
   </div>
 
+  <script src="/js/vendor/jquery-min.js"></script>
   <script src="/js/vendor/bootstrap.js"></script>
   <script src="/js/vendor/underscore-min.js"></script>
-  <script src="/js/vendor/jquery-min.js"></script>
   <script src="/js/vendor/handlebars.js"></script>
   <script src="/js/event.js"></script>
   <script src="/js/render.js"></script>

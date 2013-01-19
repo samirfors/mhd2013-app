@@ -30,8 +30,10 @@ window.Fucker.init = function() {
                 console.log(response.data)
 
                 window.Fucker.model.events = response.data;
-                window.Render.eventsList(window.Fucker.model.events)
-                window.Fucker.createPlaylist(window.Fucker.model.events[0]);
+                window.Render.eventsList(window.Fucker.model.events);
+                $('.events-list').on('click', '.event', function () {
+                    window.Fucker.createPlaylist(window.Fucker.model.events[$(this).data('index')]);
+                });
             }
             xhr.send(null);
         },
