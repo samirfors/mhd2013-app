@@ -107,7 +107,7 @@ window.Fucker.finalizePlaylist = function()
     {
           console.log(window.Fucker.model.tracks[i].name);  
     } 
-    SPPlayList.init("PARTY!!!!",window.Fucker.model.tracks.shuffle());
+    SPPlayList.init(window.Fucker.model.event.name,window.Fucker.model.tracks.shuffle());
 }
 
 Array.prototype.shuffle = function () {

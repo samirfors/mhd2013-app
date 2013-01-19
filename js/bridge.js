@@ -38,10 +38,17 @@ var Bridge = function (token) {
 	        toplist.observe(models.EVENT.CHANGE, function() {
 			//console.log("GOT: " + toplist.results.length + " from " + user )
 	        	//callback(toplist.results[0]);
-	            toplist.results.forEach(function(track) {
-	            //console.log("ADDED FROM:" + user)
+	       
+	        	  toplist.results.forEach(function(track) {
+	             
 	                callback(track);
+
 	            });
+
+	        	/*for(var i=0; i < 3; i++)
+	        	{
+	          		callback(toplist.results[i]);		
+	        	}*/
 	        });
 
 	        toplist.run();
