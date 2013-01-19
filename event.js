@@ -1,9 +1,9 @@
-var Event =  {}
+window.Fucker =  {}
 
-Event.data = {};
-Event.users = {};
+window.Fucker.data = {};
+window.Fucker.users = {};
 
-Event.init = function() {
+window.Fucker.init = function() {
     var sp = getSpotifyApi();
     var auth = sp.require('$api/auth');
     console.log("Here!")
@@ -19,7 +19,7 @@ Event.init = function() {
             xhr.onreadystatechange = function () {
                 if (xhr.readyState != 4) return;
                 var response = JSON.parse(xhr.responseText);
-                Event.data = response.data;
+                window.Fucker.data = response.data;
             }
             xhr.send(null);
         },
@@ -30,17 +30,17 @@ Event.init = function() {
     });
 }
 
-Event.getUsers = function(eventID){
+window.Fucker.getUsers = function(eventID){
     var users  = [];
     var eventData = {};
-    if (Event.data == {})
+    if (window.Fucker.data == {})
         return {};
     console.log(Event.data)
-    Event.data.forEach(function(fbEvent){
+    window.Fucker.data.forEach(function(fbEvent){
         if (fbEvent.id ==  eventID) {
             eventData = fbEvent;
-            Event.users = eventData.attending.data;
-            return Event.users;
+            window.Fucker.users = eventData.attending.data;
+            return window.Fucker.users;
         }
     })
     return {};

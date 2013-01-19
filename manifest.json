@@ -1,31 +1,31 @@
 {
-	"AppDescription": {
-		"en": "Event Playlist Maker"
-	},
-	"AppIcon": {
-		"36x18": "tutorial.png"
-	},
-	"AppName": {
-		"en": "Event Playlist Maker"
-	},
-	"BundleIdentifier": "mhd2013-app",
-	"BundleType": "Application",
-	"BundleVersion": "0.1",
-	"DefaultTabs": [
-		{
-			"arguments": "index",
-			"title": {
-				"en": "Home"
-			}
-		}
-	],
-	"Dependencies": {
+        "AppDescription": {
+                "en": "Event Playlist Maker"
+        },
+        "AppIcon": {
+                "36x18": "tutorial.png"
+        },
+        "AppName": {
+                "en": "Event Playlist Maker"
+        },
+        "BundleIdentifier": "mhd2013-app",
+        "BundleType": "Application",
+        "BundleVersion": "0.1",
+        "DefaultTabs": [
+                {
+                        "arguments": "index",
+                        "title": {
+                                "en": "Home"
+                        }
+                }
+        ],
+        "Dependencies": {
         "api": "1.10.2",
         "views": "1.18.1"
     },
-	"RequiredInterface": 1,
-	"SupportedLanguages": [
-		"en"
-	],
-	"VendorIdentifier": "co.mager"
+        "RequiredInterface": 1,
+        "SupportedLanguages": [
+                "en"
+        ],
+        "VendorIdentifier": "co.mager"
 }
