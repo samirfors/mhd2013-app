@@ -1,9 +1,9 @@
 define([
   'backbone',
   'underscore',
-  'views/view'
+  'views/app-view'
 ],
-function(Backbone, _, View) {
+function(Backbone, _, AppView) {
   'use strict';
 
   var console = window.console,
@@ -15,14 +15,17 @@ function(Backbone, _, View) {
       this.eventHub = {};
       _.extend(this.eventHub, Backbone.Events);
 
-      this.view = new View({
-        eventHub    : this.eventHub
+      console.log(this.eventHub);
+
+      this.view = new AppView({
+        eventHub: this.eventHub
       });
+
     }
 
   }),
 
-  initialize = function(){
+  initialize = function() {
     var bootstrapper = new Bootstrapper();
     return bootstrapper;
   };
