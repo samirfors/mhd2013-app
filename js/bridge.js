@@ -19,7 +19,11 @@ var Bridge = function (token) {
 		fbToSpotify: function (user, callback) {
 			var url = 'https://graph.facebook.com/' + user + '/music.playlists?access_token=' + accessToken;
 	        $.get(url, function (response) {
-	            user = response.data[0].data.playlist.url.split('/')[4];
+	        	console.log(response)
+	        	if(response.data.length > 0)
+	        	{
+	            	user = response.data[0].data.playlist.url.split('/')[4];
+	        	}
 	            callback(user);
 	        }, 'json');
 	    },
@@ -29,9 +33,11 @@ var Bridge = function (token) {
 	        toplist.toplistType = models.TOPLISTTYPE.USER;
 	        toplist.matchType = models.TOPLISTMATCHES.TRACKS;
 	        toplist.userName = user;
-
 	        toplist.observe(models.EVENT.CHANGE, function() {
+	            
+	        	//callback(toplist.results[0]);
 	            toplist.results.forEach(function(track) {
+	            	console.log("ADDED FROM:" + user)
 	                callback(track);
 	            });
 	        });
