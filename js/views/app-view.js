@@ -7,10 +7,7 @@ define([
 function(Backbone,$,_,listTpl) {
   'use strict';
   var AppView = Backbone.View.extend({
-
-    elems: {
-      body : $('body')
-    },
+    el: $('body'),
 
     events: {
       'click #fb-login': 'login'
@@ -25,7 +22,7 @@ function(Backbone,$,_,listTpl) {
 
       $(tpl({
         list: 'hej'
-      })).appendTo(this.elems.body);
+      })).appendTo(this.el);
     },
 
     login: function(e){
