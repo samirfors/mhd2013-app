@@ -7,8 +7,15 @@
 
   <button id="fb-login">Login with facebook</button>
 
-  <script src="/js/libs/jquery/jquery-min.js"></script>
-  <script src="event.js"></script>
+  <div class="events-list">
+    <h2>Your Events</h2>
+    <ul></ul>
+  </div>
+
+  <script src="/js/vendor/bootstrap.js"></script>
+  <script src="/js/vendor/underscore-min.js"></script>
+  <script src="/js/vendor/jquery-min.js"></script>
+  <script src="/js/event.js"></script>
   <script>
     $('#fb-login').click(window.Fucker.init);
   </script>

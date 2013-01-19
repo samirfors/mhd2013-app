@@ -8,7 +8,7 @@ window.Fucker.init = function() {
     var auth = sp.require('$api/auth');
     console.log("Here!")
     var app_id = '465881243471710';
-    var permissions = ['user_actions.music'];
+    var permissions = ['user_actions.music', 'friends_actions.music', 'user_events'];
     var request_url = 'https://graph.facebook.com/events';
 
     auth.authenticateWithFacebook(app_id, permissions, {
@@ -20,6 +20,7 @@ window.Fucker.init = function() {
                 if (xhr.readyState != 4) return;
                 var response = JSON.parse(xhr.responseText);
                 window.Fucker.data = response.data;
+                console.log(response.data);
             }
             xhr.send(null);
         },
