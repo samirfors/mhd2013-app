@@ -15,7 +15,7 @@ window.Fucker.init = function() {
 
     auth.authenticateWithFacebook(app_id, permissions, {
         onSuccess: function(accessToken, ttl) {
-            var url = 'https://graph.facebook.com/me/events?fields=attending&access_token=' + accessToken;
+            var url = 'https://graph.facebook.com/me/events?fields=attending,name,picture&access_token=' + accessToken;
             var xhr = new XMLHttpRequest();
             xhr.open('GET', url);
             xhr.onreadystatechange = function () {
@@ -42,7 +42,10 @@ window.Fucker.init = function() {
     });
 }
 
+window.Fucker.createPlaylist = function(event)
+{
 
+}
 
 window.Fucker.getUsers = function(eventID){
     var users  = [];
