@@ -11,25 +11,6 @@
     <ul id="listens"></ul>
   </div>
 
-  <script>
-
-  require(['$api/models', '$api/toplists#Toplist',], function(models, Toplist) {
-     console.log('require');
-     // When application has loaded, run pages function
-     //models.application.load('arguments').done(pages);
-
-     // When arguments change, run pages function
-     //models.application.addEventListener('arguments', pages);
-
-     var list = Toplist.forCurrentUser();
-     window.t_list = list;
-     list.tracks.snapshot().done(function(tracks) {
-       for (var i = 0; i < tracks.length; i++)
-         console.log(tracks.get(i));
-     });
-  }); // require
-
-  </script>
   <script data-main="/js/main" src="/js/libs/require/require.js"></script>
 </body>
 </html>
