@@ -3,12 +3,14 @@ window.Fucker =  {}
 window.Fucker.data = {};
 window.Fucker.users = {};
 
+window.Fucker.model = {events:{}};
+
 window.Fucker.init = function() {
     var sp = getSpotifyApi();
     var auth = sp.require('$api/auth');
     console.log("Here!")
     var app_id = '465881243471710';
-    var permissions = ['user_actions.music', 'friends_actions.music', 'user_events'];
+    var permissions = ['user_actions.music','user_events'];
     var request_url = 'https://graph.facebook.com/events';
 
     auth.authenticateWithFacebook(app_id, permissions, {
@@ -20,7 +22,21 @@ window.Fucker.init = function() {
                 if (xhr.readyState != 4) return;
                 var response = JSON.parse(xhr.responseText);
                 window.Fucker.data = response.data;
-                console.log(response.data);
+                console.log(response.data)
+
+                $('#fb-login').hide();
+                window.Fucker.render();
+
+
+                for(var i = 0; i < response.data.length; i++)
+                {
+                    console.log(response.data[0])
+                    var newEvent = {
+
+
+                }
+
+
             }
             xhr.send(null);
         },
@@ -30,6 +46,13 @@ window.Fucker.init = function() {
         onComplete : function() { }
     });
 }
+
+window.Fucker.render = function()
+{
+
+
+}
+
 
 window.Fucker.getUsers = function(eventID){
     var users  = [];
