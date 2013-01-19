@@ -24,19 +24,14 @@ window.Fucker.init = function() {
                 window.Fucker.data = response.data;
                 console.log(response.data)
 
-                $('#fb-login').hide();
-                window.Fucker.render();
+                window.Fucker.model.events = response.data;
+                window.Render.eventsList(window.Fucker.model.events);
 
-
-                for(var i = 0; i < response.data.length; i++)
+              /*  for(var i = 0; i < response.data.length; i++)
                 {
-                    console.log(response.data[0])
-              //      var newEvent = {
-
-
-                }
-
-
+                    console.log(response.data[0].attending)
+                    
+                }*/
             }
             xhr.send(null);
         },
@@ -47,11 +42,6 @@ window.Fucker.init = function() {
     });
 }
 
-window.Fucker.render = function()
-{
-
-
-}
 
 
 window.Fucker.getUsers = function(eventID){
