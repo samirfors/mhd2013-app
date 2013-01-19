@@ -18,9 +18,9 @@ function(Backbone, _, AppView, EventCollection) {
 
       console.log(this.eventHub);
 
-      this.events = new EventCollection();
-
-      console.log("yeayea" + this.events);
+      this.events = new EventCollection({
+        eventHub: this.eventHub
+      });
 
       this.view = new AppView({
         eventHub: this.eventHub

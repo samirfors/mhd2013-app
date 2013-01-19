@@ -25,13 +25,8 @@ function(Backbone,$,_,listTpl) {
       })).appendTo(this.el);
     },
 
-    login: function(e){
-
-
-
-      console.log('LOGIN');
-
-
+    login: function(e) {
+      this.eventHub.trigger('initLogin');
     }
 
   });
