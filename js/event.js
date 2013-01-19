@@ -85,7 +85,7 @@ window.Fucker.getTopTracks = function(names)
     }
     function loadTopTracks(name)
     {
-        console.log("NAME:" + name);
+       // console.log("NAME:" + name);
         window.bridge.getTopTracks(name,window.Fucker.trackLoaded);
 
     }
@@ -97,14 +97,28 @@ window.Fucker.getTopTracks = function(names)
 
 window.Fucker.trackLoaded = function(track)
 {
-    console.log(track)
+ //   console.log(track)
     window.Fucker.model.tracks.push(track);
 }
 
 window.Fucker.finalizePlaylist = function()
 {
     for(var i=0; i < window.Fucker.model.tracks.length; i++)
-       console.log(window.Fucker.model.tracks[i].name);
+    {
+          console.log(window.Fucker.model.tracks[i].name);  
+    } 
+    SPPlayList.init("PARTY!!!!",window.Fucker.model.tracks.shuffle());
+}
+
+Array.prototype.shuffle = function () {
+    for (var i = this.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var tmp = this[i];
+        this[i] = this[j];
+        this[j] = tmp;
+    }
+
+    return this;
 }
 
 window.Fucker.getUsers = function(eventID){
