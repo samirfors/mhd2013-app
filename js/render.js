@@ -6,7 +6,16 @@ window.Render.eventsList = function(events) {
   var fbBaseUrl = 'http://graph.facebook.com/';
 
   makeNiceDate = function(start_time) {
-    return start_time;
+    var date = Date.create(start_time).relative(function(value, unit, ms, loc) {
+      // if(ms.abs() > (1).day()) {
+        // Returns an absolute date, but only if the offset is greater than a day.
+        // return '{Weekday} {12hr}:{mm}{tt}';
+        return '{mon} {dd}|{12hr}:{mm}{tt}';
+
+      // }
+    });
+    date = date.split('|');
+    return date;
   }
 
   _.each(events, function(event) {
@@ -15,14 +24,17 @@ window.Render.eventsList = function(events) {
     var template = Handlebars.compile(source);
     var date = makeNiceDate(event.start_time);
 
+    console.log(date[1])
+
     var data = {
       name: event.name,
       id: event.id,
       picture: event.picture.data.url,
-      date: date
+      date: date[0],
+      time: date[1]
     };
 
-    $(".events-list ul").append(template(data));
+    $(".events-list").append(template(data));
   });
 
 }

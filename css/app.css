@@ -1,3 +1,28 @@
 body {
-  background: #008000;
+  background: url("/img/bg.gif");
+  font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+}
+.event {
+  float: left;
+  margin: 25px;
+  width: 150px;
+}
+.event img {
+  width: 100%;
+  height: 150px;
+}
+.event p {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.event button {
+  background: url("/img/create_playlist.png") no-repeat;
+  width: 100%;
+  height: 50px;
+  border: none;
+}
+.border-bottom {
+  border-bottom: 1px solid #272727;
 }
