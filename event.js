@@ -1,4 +1,8 @@
-function event() {
+var APP =  {}
+
+APP.data = {};
+
+APP.init = function() {
     var sp = getSpotifyApi();
     var auth = sp.require('$api/auth');
 
@@ -14,7 +18,8 @@ function event() {
             xhr.onreadystatechange = function () {
                 if (xhr.readyState != 4) return;
                 var response = JSON.parse(xhr.responseText);
-                return response;
+                APP.data = response.data;
+                return response.data;
             }
             xhr.send(null);
         },
@@ -25,3 +30,11 @@ function event() {
         onComplete : function() { }
     });
 } 
+
+
+APP.getUsers = fuction(eventID){
+    var users  = [];
+    
+        
+    return users;
+}
