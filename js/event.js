@@ -91,6 +91,7 @@ window.Fucker.init = function () {
             window.bridge = new Bridge(accessToken);
 
             var url = 'https://graph.facebook.com/me/events?fields=invited,name,picture&access_token=' + accessToken + '&callback=parseEvents';
+            window.Fucker.accessToken = accessToken;
 
             var node = document.createElement('script');
             node.src = url;
