@@ -326,23 +326,17 @@ h3 {
   width: 50%;
   display: inline-block;
 }
+.meta span img {
+  margin-right: 5px;
+  position: relative;
+  top: 1px;
+}
 .meta span:first-child {
   border-right: 1px solid #aeaeae;
 }
 .meta span:last-child {
   margin-left: -3px;
   border-left: 1px solid #fff;
-}
-i {
-  font-family: 'Entypo';
-  font-style: normal;
-  font-size: 28px;
-  margin-right: 2px;
-  position: relative;
-  top: 2px;
-}
-.clock {
-  background: url("/img/clock.png");
 }
 .border-bottom {
   border-bottom: 1px solid #666;
