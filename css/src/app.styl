@@ -112,9 +112,21 @@ h3
 
 .header
   background: #f7f7f7
-
+  padding: 10px
+  margin-bottom: 40px
   .container
-    width: auto
+    width: 245px
+    margin: 0 auto
+    .disc
+      margin-right: 5px
+      transition-duration: 1s
+      transform: rotate(0deg)
+      &:hover
+        transition-duration: 1s
+        transform: rotate(180deg)
+    .text
+      position: relative
+      top: 5px
 
 .app-description
   width: 30%

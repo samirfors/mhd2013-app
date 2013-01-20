@@ -166,9 +166,41 @@ h3 {
 }
 .header {
   background: #f7f7f7;
+  padding: 10px;
+  margin-bottom: 40px;
 }
 .header .container {
-  width: auto;
+  width: 245px;
+  margin: 0 auto;
+}
+.header .container .disc {
+  margin-right: 5px;
+  -webkit-transition-duration: 1s;
+  -moz-transition-duration: 1s;
+  -o-transition-duration: 1s;
+  -ms-transition-duration: 1s;
+  transition-duration: 1s;
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
+  -ms-transform: rotate(0deg);
+  transform: rotate(0deg);
+}
+.header .container .disc:hover {
+  -webkit-transition-duration: 1s;
+  -moz-transition-duration: 1s;
+  -o-transition-duration: 1s;
+  -ms-transition-duration: 1s;
+  transition-duration: 1s;
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+.header .container .text {
+  position: relative;
+  top: 5px;
 }
 .app-description {
   width: 30%;
