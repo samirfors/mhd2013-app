@@ -13,7 +13,7 @@ window.Fucker.init = function() {
     models = sp.require('$api/models');
     console.log("Here!")
     var app_id = '465881243471710';
-    var permissions = ['user_actions.music','user_events','friends_actions:music'];
+    var permissions = ['user_actions.music','user_events','friends_actions.music','friends_actions:music','user_actions:music'];
     var request_url = 'https://graph.facebook.com/events';
 
     auth.authenticateWithFacebook(app_id, permissions, {

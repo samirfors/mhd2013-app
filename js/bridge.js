@@ -36,22 +36,23 @@ var Bridge = function (token) {
 	        toplist.userName = user;
 	          
 	        toplist.observe(models.EVENT.CHANGE, function() {
-			//console.log("GOT: " + toplist.results.length + " from " + user )
+			console.log("GOT: " + toplist.results.length + " from " + user )
 	        	//callback(toplist.results[0]);
-	       
+	       		var i = 0;
 	        	  toplist.results.forEach(function(track) {
-	             
+	             	
+	             	if(i < 6)
 	                callback(track);
-
+	                i++;
 	            });
 
-	        	/*for(var i=0; i < 3; i++)
-	        	{
-	          		callback(toplist.results[i]);		
-	        	}*/
+	        	
 	        });
 
 	        toplist.run();
 	    }
+
+
+
 	};
 };
