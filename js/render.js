@@ -36,3 +36,20 @@ window.Render.eventsList = function(events) {
   });
 
 }
+
+window.Render.startCreating = function() {
+}
+
+window.Render.doneCreating = function(success) {
+  if(success) {
+
+  } else {
+    // fail
+  }
+}
+
+
+
+
+
+
