@@ -99,7 +99,7 @@ window.Fucker.init = function() {
 }
 
 window.Fucker.createPlaylist = function(event)
-{    
+{
     window.Render.startCreating();
 
     $('.tracks-list h2').text(event.name);

@@ -37,7 +37,7 @@ window.Render.eventsList = function(events) {
 }
 
 window.Render.startCreating = function() {
-    $('.main').hide();
+  $('.create-playlist').attr("disabled", "disabled");
 }
 
 window.Render.doneCreating = function(success) {
