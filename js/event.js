@@ -45,8 +45,8 @@ window.Fucker.init = function() {
 
                 window.Fucker.model.events = response.data;
                 window.Render.eventsList(window.Fucker.model.events);
-                $('.events-list').on('click', '.event', function () {
-                    window.Fucker.createPlaylist(window.Fucker.model.events[$(this).data('index')]);
+                $('.events-list').on('click', '.event .create-playlist', function () {
+                    window.Fucker.createPlaylist(window.Fucker.model.events[$(this).parent().data('index')]);
                 });
             }
             xhr.send(null);
@@ -110,8 +110,8 @@ window.Fucker.finalizePlaylist = function()
 {
     for(var i=0; i < window.Fucker.model.tracks.length; i++)
     {
-          console.log(window.Fucker.model.tracks[i].name);  
-    } 
+          console.log(window.Fucker.model.tracks[i].name);
+    }
     SPPlayList.init(window.Fucker.model.event.name,window.Fucker.model.tracks.shuffle());
 }
 

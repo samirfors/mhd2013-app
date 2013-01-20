@@ -2,17 +2,14 @@ window.Render = {};
 
 window.Render.eventsList = function(events) {
 
+  $('body').removeClass('start')
   $('#fb-login').hide();
+  $('.events-list').show();
   var fbBaseUrl = 'http://graph.facebook.com/';
 
   makeNiceDate = function(start_time) {
     var date = Date.create(start_time).relative(function(value, unit, ms, loc) {
-      // if(ms.abs() > (1).day()) {
-        // Returns an absolute date, but only if the offset is greater than a day.
-        // return '{Weekday} {12hr}:{mm}{tt}';
         return '{mon} {dd}|{12hr}:{mm}{tt}';
-
-      // }
     });
     date = date.split('|');
     return date;

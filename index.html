@@ -2,23 +2,24 @@
 <head>
 	<title>Event playlist generator</title>
   <link rel="stylesheet" type="text/css" href="css/app.css">
-  <link href='http://fonts.googleapis.com/css?family=Ceviche+One' rel='stylesheet'>
-  <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:300italic,400italic,700italic,400,300,700' rel='stylesheet'>
 </head>
-<body>
+<body class="start">
 
   <script id="events-list-tpl" type="text/x-handlebars-template">
     <div data-id="{{id}}" data-index="{{index}}" class="event">
-      <img src="{{picture}}">
-      <p class="border-bottom">{{name}}</p>
-      <p>
-        <span>{{date}}</span>
-        <span>{{time}}</span>
+      <img class="event-img" src="{{picture}}">
+      <p class="title border-bottom">{{name}}</p>
+      <p class="meta">
+        <span><i>&#128340;</i>{{time}}</span>
+        <span><i>&#128197;</i>{{date}}</span>
       </p>
-      <button class="create-playlist">Create playlist</button>
+      <a class="create-playlist">
+        <img src="img/note.png">
+        Create <em>playlist</em>
+      </a>
   </script>
 
-  <script id="tracks-list-tpl" type="text/x-handlebars-template">
+<script id="tracks-list-tpl" type="text/x-handlebars-template">
     <li class="track">
       <a href="{{link}}">
         <img src="{{picture}}"/>
@@ -27,13 +28,10 @@
     </li>
   </script>
 
-	<p>Let's get this party started!</p>
-
-  <button id="fb-login">Login with facebook</button>
+  <a id="fb-login" href="#">Let's get this party <em>started!</em><img src="img/fb.png" /></a>
 
   <div class="events-list">
-    <h2>Your Events</h2>
-      <ul></ul>
+    <h2>Events</h2>
   </div>
 
   <div class="tracks-list" style="display:none;">
@@ -50,8 +48,9 @@
   <script src="/js/render.js"></script>
   <script src="/js/bridge.js"></script>
   <script src="/js/playlist.js"></script>
+
   <script>
-    window.Fucker.init();
+    // window.Fucker.init();
     $('#fb-login').click(window.Fucker.init);
   </script>
 </body>
