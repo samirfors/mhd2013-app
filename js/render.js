@@ -3,8 +3,8 @@ window.Render = {};
 window.Render.eventsList = function(events) {
 
   $('body').removeClass('start')
-  $('#fb-login').hide();
-  $('.events-list').show();
+  $('.login-screen').hide();
+  $('.app').show();
   var fbBaseUrl = 'http://graph.facebook.com/';
 
   makeNiceDate = function(start_time) {
