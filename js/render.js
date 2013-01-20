@@ -41,6 +41,10 @@ window.Render.startCreating = function() {
     '-webkit-filter':'blur(5px)',
     'transition-duration': '0.5s'
   });
+  $('.disc').css({
+    'transform': 'rotate(10000deg)',
+    'transition-duration': '25s'
+  });
   $('.create-playlist').click(false);
 }
 
@@ -49,6 +53,10 @@ window.Render.doneCreating = function(success) {
     $('.main').css({
       '-webkit-filter':'blur(0px)',
       'transition-duration': '0.5s'
+    });
+    $('.disc').css({
+      'transform': 'rotate(0deg)',
+      'transition-duration': '0.2s'
     });
     $('.create-playlist').css('cursor', 'pointer');
     $('.create-playlist').click(function() {
