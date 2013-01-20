@@ -1,18 +1,19 @@
-var SPPlayList = {}
+var SPPlayList = function (name, tracks) {
+    var playlist = new models.Playlist(name);
 
-SPPlayList.uri = "";
-SPPlayList.tracks = {};
-SPPlayList.name = "";
+    playlist.data.collaborative = true;
 
-SPPlayList.init = function(name, tracks) {
-    var sp = getSpotifyApi();
-	var models = sp.require('$api/models');
-	var playlist = new models.Playlist(name);
-	SPPlayList.name = name;
-	playlist.data.collaborative = true;
-
-	tracks.forEach(function(track){
-		playlist.add(models.Track.fromURI(track.data.uri));
-	});
-	SPPlayList.tracks = playlist.tracks;
-}
+    return {
+        uri: playlist.uri,
+        tracks: playlist.tracks,
+        name: name,
+        addTracks: function (tracks) {
+            this.tracks.forEach(function (track) {
+                this.addTrack(track);
+            });
+        },
+        addTrack: function (track) {
+            playlist.add(models.Track.fromURI(track.data.uri));
+        }
+    }
+};

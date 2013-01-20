@@ -100,34 +100,44 @@ window.Fucker.init = function() {
 window.Fucker.createPlaylist = function(event)
 {
     window.Render.startCreating();
-
+    var splist = new SPPlayList(event.name);
     $('.tracks-list h2').text(event.name);
     $('.tracks-list ul li').remove();
     window.party = {};
+    var count = event.invited.data.length;
+
     event.invited.data.forEach(function (attendee) {
         window.bridge.fbToSpotify(attendee.id, function (user) {
             window.party[user] = [];
-            window.bridge.getTopTracks(user, function (track) {
-                window.party[user].push({
-                    facebook: attendee.id,
-                    spotify: user,
-                    data: track.data
+            window.bridge.getTopTracks(user, function (tracks) {
+                tracks.forEach(function (track) {
+                    window.party[user].push({
+                        facebook: attendee.id,
+                        spotify: user,
+                        data: track.data
+                    });
                 });
+                count--;
             });
         });
     });
 
-    // Fix so it is async "shuffled"
-    setTimeout(function () {
-        var partylist = Sort.init(window.party);
-        console.log('sorted', partylist);
-        partylist.forEach(function (track) {
-            console.log('add track', track);
-            window.Render.addTrack(track);
-        });
-        SPPlayList.init(event.name, partylist);
-        window.Render.doneCreating(true);
-    }, 5000);
+    var poller = setInterval(function () {
+        console.log(count);
 
-    window.location = 'spotify:app:mhd2013-app:playlist';
+        if (_.isNumber(count) && count <= 0) {
+            console.log(window.party);
+
+            var partylist = Sort.init(window.party);
+            console.log('sorted', partylist);
+            partylist.forEach(function (track) {
+                console.log('add track', track);
+                window.Render.addTrack(track);
+                splist.addTrack(track);
+            });
+
+            window.Render.doneCreating(true);
+            clearInterval(poller);
+        }
+    }, 500);
 }
