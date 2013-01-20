@@ -1,12 +1,12 @@
 {
   "AppDescription": {
-    "en": "Event Playlist Maker"
+    "en": "Creating playlist based on users' facebook events"
   },
   "AppIcon": {
-    "36x18": "tutorial.png"
+    "36x18": "logo.png"
   },
   "AppName": {
-    "en": "Event Playlist Maker"
+    "en": "Party Lists"
   },
   "BundleIdentifier": "mhd2013-app",
   "BundleType": "Application",
