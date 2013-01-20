@@ -132,17 +132,20 @@ window.Fucker.finalizePlaylist = function()
 
     });*/
     
-
     for (var key in window.Fucker.model.tracks) {
      var obj = window.Fucker.model.tracks[key];
      for(var i=0; i < obj.length; i++)
-            finalArray.push(obj[i])
+            finalArray.push(obj[i]);
     }
 
     console.log(finalArray)
 
     SPPlayList.init(window.Fucker.model.event.name,finalArray.shuffle());
     
+
+    /*DONE*/
+
+
 }
 
 Array.prototype.shuffle = function () {
