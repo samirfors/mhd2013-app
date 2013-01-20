@@ -46,7 +46,8 @@ window.Render.startCreating = function() {
 
 window.Render.doneCreating = function(success) {
   if(success) {
-      $(".arrow").fadeIn();
+    $(".arrow").fadeIn();
+    $(".arrow").delay(5000).fadeOut();
 
     $('.main').css({
       '-webkit-filter':'blur(0px)',
