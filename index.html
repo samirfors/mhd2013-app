@@ -19,10 +19,24 @@
       </a>
   </script>
 
+<script id="tracks-list-tpl" type="text/x-handlebars-template">
+    <li class="track">
+      <a href="{{link}}">
+        <img src="{{picture}}"/>
+        <span>{{title}}</span>
+      </a>
+    </li>
+  </script>
+
   <a id="fb-login" href="#">Let's get this party <em>started!</em><img src="img/fb.png" /></a>
 
   <div class="events-list">
     <h2>Events</h2>
+  </div>
+
+  <div class="tracks-list" style="display:none;">
+    <h2>Playlist name</h2>
+    <ul></ul>
   </div>
 
   <script src="/js/vendor/jquery-min.js"></script>
