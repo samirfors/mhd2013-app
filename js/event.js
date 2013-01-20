@@ -88,7 +88,7 @@ window.Fucker.init = function () {
     auth.authenticateWithFacebook(app_id, permissions, {
         onSuccess: function (accessToken, ttl) {
             window.bridge = new Bridge(accessToken);
-
+            window.accessToken = accessToken;
             var url = 'https://graph.facebook.com/me/events?fields=invited,name,picture&access_token=' + accessToken + '&callback=parseEvents';
             window.Fucker.accessToken = accessToken;
 
