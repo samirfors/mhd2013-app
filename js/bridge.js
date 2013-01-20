@@ -34,19 +34,10 @@ var Bridge = function (token) {
 	        toplist.matchType = models.TOPLISTMATCHES.TRACKS;
 	        toplist.userName = user;
 
-	        toplist.observe(models.EVENT.CHANGE, function() {
+	        toplist.observe(models.EVENT.ITEMS_ADDED, function() {
 				console.log("GOT: " + toplist.results.length + " from " + user )
-	        	//callback(toplist.results[0]);
-	       		var i = 0;
-	        	toplist.results.forEach(function(track) {
 
-	            	if (i < 6) {
-	                	callback(track);
-					}
-	                i++;
-	            });
-
-
+	        	callback(toplist.results);
 	        });
 
 	        toplist.run();
@@ -56,8 +47,5 @@ var Bridge = function (token) {
 	    	var uri ='spotify:user:' + user + ':starred';
 	    	var playlist = models.Playlist.fromURI(uri, callback);
 	    }
-
-
-
 	};
 };
