@@ -15,5 +15,5 @@ var SPPlayList = function (name, tracks) {
         addTrack: function (track) {
             playlist.add(models.Track.fromURI(track.data.uri));
         }
-    }
+    };
 };

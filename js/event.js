@@ -1,9 +1,9 @@
-window.Fucker =  {}
+window.Fucker =  {};
 
 window.Fucker.data = {};
 window.Fucker.users = {};
 
-window.Fucker.model = {events:{},spotifyNames:[],tracks:{}};
+window.Fucker.model = {events: {}, spotifyNames: [], tracks: {}};
 
 var sp = getSpotifyApi();
 var models = sp.require('$api/models');
@@ -23,38 +23,41 @@ models.application.observe(models.EVENT.ARGUMENTSCHANGED, function () {
     }*/
 });
 
-var Sort = {}
+var Sort = {};
 
 Sort.results = {};
 Sort.input = {};
 
-Sort.init = function(data) {
+Sort.init = function (data) {
     console.log("Sort: Started", data);
 
-    var result = []
-    var total = 0;
-    var users = 0;
-    var trackLimit = 0;
+    var result = [],
+        total = 0,
+        users = 0,
+        trackLimit = 0,
+        key,
+        tracks,
+        i;
 
     // Calculate total amount of tracks
-    for (var key in data) {
-        var tracks = data[key];
+    for (key in data) {
+        tracks = data[key];
         if (data[key].length > 0) {
-            users++;
-            total += tracks.length
+            users += 1;
+            total += tracks.length;
         }
     }
 
     // Calculate total amount of song per person
-    trackLimit = Math.floor(total/users);
+    trackLimit = Math.floor(total / users);
 
     // Arranging array
-    for (var i = 0; i < trackLimit; i++) {
-        for (var key in data) {
+    for (i = 0; i < trackLimit; i += 1) {
+        for (key in data) {
             if (data[key].length > i) {
                 result.push(data[key][i]);
             }
-        };
+        }
     }
     console.log("Sort: Ended");
 
@@ -84,7 +87,7 @@ window.Fucker.init = function () {
         ];
 
     auth.authenticateWithFacebook(app_id, permissions, {
-        onSuccess: function(accessToken, ttl) {
+        onSuccess: function (accessToken, ttl) {
             window.bridge = new Bridge(accessToken);
 
             var url = 'https://graph.facebook.com/me/events?fields=invited,name,picture&access_token=' + accessToken + '&callback=parseEvents';
@@ -93,15 +96,14 @@ window.Fucker.init = function () {
             node.src = url;
             document.body.appendChild(node);
         },
-        onFailure : function(error) {
+        onFailure : function (error) {
             console.log('Authentication failed with error: ' + error);
         },
-        onComplete : function() { }
+        onComplete : function () { }
     });
-}
+};
 
-window.Fucker.createPlaylist = function(event)
-{
+window.Fucker.createPlaylist = function (event) {
     window.Render.startCreating();
     var splist = new SPPlayList(event.name);
     $('.tracks-list h2').text(event.name);
@@ -120,7 +122,7 @@ window.Fucker.createPlaylist = function(event)
                         data: track.data
                     });
                 });
-                count--;
+                count -= 1;
             });
         });
     });
@@ -143,4 +145,4 @@ window.Fucker.createPlaylist = function(event)
             clearInterval(poller);
         }
     }, 500);
-}
+};
