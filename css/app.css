@@ -206,14 +206,12 @@ h3 {
 .app-description {
   width: 30%;
   float: left;
-  background: rgba(0,0,0,0.04);
   padding: 0 20px 20px;
-  -webkit-box-shadow: inset 0px 0px 3px 0px rgba(0,0,0,0.4);
-  -moz-box-shadow: inset 0px 0px 3px 0px rgba(0,0,0,0.4);
-  box-shadow: inset 0px 0px 3px 0px rgba(0,0,0,0.4);
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
+  border-left: 1px solid #ddd;
+  color: #999;
+}
+.app-description p {
+  line-height: 24px;
 }
 .events-list {
   width: 70%;
