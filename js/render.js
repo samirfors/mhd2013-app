@@ -37,6 +37,7 @@ window.Render.eventsList = function(events) {
 }
 
 window.Render.startCreating = function() {
+    $('.main').hide();
 }
 
 window.Render.doneCreating = function(success) {
