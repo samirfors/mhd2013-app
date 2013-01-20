@@ -82,8 +82,7 @@ window.Fucker.init = function () {
         app_id = '465881243471710',
         request_url = 'https://graph.facebook.com/events',
         permissions = [
-            'user_actions.music', 'user_events', 'friends_actions.music',
-            'friends_actions:music', 'user_actions:music'
+            'user_actions.music', 'user_events', 'friends_actions.music'
         ];
 
     auth.authenticateWithFacebook(app_id, permissions, {
