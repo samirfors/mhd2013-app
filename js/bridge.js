@@ -33,20 +33,20 @@ var Bridge = function (token) {
 	        toplist.toplistType = models.TOPLISTTYPE.USER;
 	        toplist.matchType = models.TOPLISTMATCHES.TRACKS;
 	        toplist.userName = user;
-	          
+
 	        toplist.observe(models.EVENT.CHANGE, function() {
 				console.log("GOT: " + toplist.results.length + " from " + user )
 	        	//callback(toplist.results[0]);
 	       		var i = 0;
 	        	toplist.results.forEach(function(track) {
-	             	
 
-	             	if(i < 6)
-	                callback(track,user);
+	            	if (i < 6) {
+	                	callback(track);
+					}
 	                i++;
 	            });
 
-	        	
+
 	        });
 
 	        toplist.run();
