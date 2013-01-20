@@ -18,12 +18,27 @@
       <button class="create-playlist">Create playlist</button>
   </script>
 
+  <script id="tracks-list-tpl" type="text/x-handlebars-template">
+    <li class="track">
+      <a href="{{link}}">
+        <img src="{{picture}}"/>
+        <span>{{title}}</span>
+      </a>
+    </li>
+  </script>
+
 	<p>Let's get this party started!</p>
 
   <button id="fb-login">Login with facebook</button>
 
   <div class="events-list">
     <h2>Your Events</h2>
+      <ul></ul>
+  </div>
+
+  <div class="tracks-list" style="display:none;">
+    <h2>Playlist name</h2>
+    <ul></ul>
   </div>
 
   <script src="/js/vendor/jquery-min.js"></script>
@@ -35,7 +50,6 @@
   <script src="/js/render.js"></script>
   <script src="/js/bridge.js"></script>
   <script src="/js/playlist.js"></script>
-
   <script>
     window.Fucker.init();
     $('#fb-login').click(window.Fucker.init);

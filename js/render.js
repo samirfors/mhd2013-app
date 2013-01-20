@@ -38,4 +38,24 @@ window.Render.eventsList = function(events) {
     $(".events-list").append(template(data));
   });
 
-}
+};
+
+window.Render.addTrack = function (track) {
+  console.log('addTrack', track);
+
+  var source = $('#tracks-list-tpl').html();
+  var template = Handlebars.compile(source);
+
+  var data = {
+    picture: 'https://graph.facebook.com/' + track.facebook + '/picture',
+    title: track.data.artists[0].name + ' - ' + track.data.name,
+    link: track.data.uri
+  }
+
+  $('.tracks-list ul').append(template(data));
+};
+
+$('.tracks-list').on('click', '.track a', function (event) {
+  event.preventDefault();
+  models.player.playTrack($(this).attr('href'));
+});

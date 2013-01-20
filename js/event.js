@@ -5,12 +5,27 @@ window.Fucker.users = {};
 
 window.Fucker.model = {events:{},spotifyNames:[],tracks:[]};
 
-var models;
+var sp = getSpotifyApi();
+var models = sp.require('$api/models');
+
+models.application.observe(models.EVENT.ARGUMENTSCHANGED, function () {
+    var args = models.application.arguments;
+    switch (args[0]) {
+        case 'index':
+            $('.events-list').show();
+            $('.tracks-list').hide();
+        break;
+
+        case 'playlist':
+            $('.events-list').hide();
+            $('.tracks-list').show();
+        break;
+    }
+});
 
 window.Fucker.init = function() {
-    var sp = getSpotifyApi();
     var auth = sp.require('$api/auth');
-    models = sp.require('$api/models');
+
     console.log("Here!")
     var app_id = '465881243471710';
     var permissions = ['user_actions.music','user_events','friends_actions.music','friends_actions:music','user_actions:music'];
@@ -27,7 +42,6 @@ window.Fucker.init = function() {
                 if (xhr.readyState != 4) return;
                 var response = JSON.parse(xhr.responseText);
                 window.Fucker.data = response.data;
-              //  console.log(response.data)
 
                 window.Fucker.model.events = response.data;
                 window.Render.eventsList(window.Fucker.model.events);
@@ -46,33 +60,24 @@ window.Fucker.init = function() {
 
 window.Fucker.createPlaylist = function(event)
 {
-    window.Fucker.model.spotifyNames = [];
-   //console.log(event);
-              window.Fucker.model.event = event;
+    $('.tracks-list h2').text(event.name);
+    $('.tracks-list ul li').remove();
+    event.attending.data.forEach(function (attendee) {
+        window.bridge.fbToSpotify(attendee.id, function (user) {
+            window.bridge.getTopTracks(user, function (track) {
+                window.Render.addTrack({
+                    facebook: attendee.id,
+                    spotify: user,
+                    data: track.data
+                });
 
-    loadUserName(null);
-    function loadUserName(user)
-    {
-        if(user)
-         window.Fucker.model.spotifyNames.push(user);
-         var count = window.Fucker.model.spotifyNames.length;
-        if(window.Fucker.model.spotifyNames.length != window.Fucker.model.event.invited.data.length)
-        {
+            });
+        });
+    });
 
-            window.bridge.fbToSpotify(window.Fucker.model.event.invited.data[count].id,loadUserName)
-        } else
-      {
-            // SHOW PLAYLIST
-            console.log("FINISHED GETTiNG NAMES")
-            /*for(var i = 0; i < window.Fucker.model.spotifyNames.length; i++)
-            {
-              // console.log( window.Fucker.model.spotifyNames[i]);
-                //$('.events-list ul').append('<li>' + window.Fucker.model.spotifyNames[i]  +  '</li>')
+    window.location = 'spotify:app:mhd2013-app:playlist';
 
-            }*/
-             window.Fucker.getTopTracks(window.Fucker.model.spotifyNames)
-    }
-    }
+    return;
 }
 
 window.Fucker.getTopTracks = function(names)
@@ -93,6 +98,7 @@ window.Fucker.getTopTracks = function(names)
    setTimeout(window.Fucker.finalizePlaylist,5000)
 
 }
+
 
 window.Fucker.trackLoaded = function(track)
 {
