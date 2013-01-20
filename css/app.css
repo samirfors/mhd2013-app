@@ -203,6 +203,11 @@ h3 {
   position: relative;
   top: 5px;
 }
+.arrow {
+  position: fixed;
+  left: 0;
+  bottom: 80px;
+}
 .app-description {
   width: 30%;
   float: left;
