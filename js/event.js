@@ -46,7 +46,8 @@ window.Fucker.init = function() {
                 window.Fucker.model.events = response.data;
                 window.Render.eventsList(window.Fucker.model.events);
                 $('.events-list').on('click', '.event .create-playlist', function () {
-                    window.Fucker.createPlaylist(window.Fucker.model.events[$(this).parent().data('index')]);
+                    window.location = 'spotify:app:mhd2013-app:playlist';
+                    window.Fucker.createPlaylist(window.Fucker.model.events[$(this).closest('.event').data('index')]);
                 });
             }
             xhr.send(null);
@@ -62,7 +63,7 @@ window.Fucker.createPlaylist = function(event)
 {
     $('.tracks-list h2').text(event.name);
     $('.tracks-list ul li').remove();
-    event.attending.data.forEach(function (attendee) {
+    event.invited.data.forEach(function (attendee) {
         window.bridge.fbToSpotify(attendee.id, function (user) {
             window.bridge.getTopTracks(user, function (track) {
                 window.Render.addTrack({
