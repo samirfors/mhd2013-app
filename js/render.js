@@ -28,7 +28,7 @@ window.Render.eventsList = function (events) {
             name: event.name,
             id: event.id,
             index: index,
-            picture: event.picture.data.url,
+            picture: 'https://graph.facebook.com/' + event.id + '/picture?type=large&access_token=' +  window.accessToken ,
             date: date[0],
             time: date[1]
         };
