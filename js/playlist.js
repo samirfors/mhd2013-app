@@ -12,7 +12,7 @@ SPPlayList.init = function(name, tracks) {
 	playlist.data.collaborative = true;
 
 	tracks.forEach(function(track){
-		playlist.add(models.Track.fromURI(track.uri));	
+		playlist.add(models.Track.fromURI(track.data.uri));
 	});
 	SPPlayList.tracks = playlist.tracks;
 }

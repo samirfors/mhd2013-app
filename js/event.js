@@ -23,6 +23,45 @@ models.application.observe(models.EVENT.ARGUMENTSCHANGED, function () {
     }
 });
 
+var Sort = {}
+
+Sort.results = {};
+Sort.input = {};
+
+Sort.init = function(data) {
+    console.log("Sort: Started", data);
+
+    var result = []
+    var total = 0;
+    var users = 0;
+    var trackLimit = 0;
+
+    // Calculate total amount of tracks
+    for (var key in data) {
+        var tracks = data[key];
+        if (data[key].length > 0) {
+            users++;
+            total += tracks.length
+        }
+    }
+
+    // Calculate total amount of song per person
+    trackLimit = Math.floor(total/users);
+
+    // Arranging array
+    for (var i = 0; i < trackLimit; i++) {
+        for (var key in data) {
+            if (data[key].length > i) {
+                result.push(data[key][i]);
+            }
+        };
+    }
+    console.log("Sort: Ended");
+
+    return result;
+
+};
+
 window.Fucker.init = function() {
     var auth = sp.require('$api/auth');
 
@@ -63,114 +102,30 @@ window.Fucker.createPlaylist = function(event)
 {
     $('.tracks-list h2').text(event.name);
     $('.tracks-list ul li').remove();
+    window.party = {};
     event.invited.data.forEach(function (attendee) {
         window.bridge.fbToSpotify(attendee.id, function (user) {
+            window.party[user] = [];
             window.bridge.getTopTracks(user, function (track) {
-                window.Render.addTrack({
+                window.party[user].push({
                     facebook: attendee.id,
                     spotify: user,
                     data: track.data
                 });
-    window.Fucker.model.spotifyNames = [];
-    window.Fucker.model.tracks = {};
-   //console.log(event);
-     window.Fucker.model.event = event;
-
             });
         });
     });
 
+    // Fix so it is async "shuffled"
+    setTimeout(function () {
+        var partylist = Sort.init(window.party);
+        console.log('sorted', partylist);
+        partylist.forEach(function (track) {
+            console.log('add track', track);
+            window.Render.addTrack(track);
+        });
+        SPPlayList.init(event.name, partylist);
+    }, 5000);
+
     window.location = 'spotify:app:mhd2013-app:playlist';
-   setTimeout(window.Fucker.finalizePlaylist,4000)
-
-    return;
-}
-
-window.Fucker.getTopTracks = function(names)
-{
-
-    for(var i = 0; i < names.length; i++)
-    {
-        console.log(names[i])
-        loadTopTracks(names[i],i);
-    }
-    function loadTopTracks(name)
-    {
-       // console.log("NAME:" + name);
-        window.bridge.getTopTracks(name,window.Fucker.trackLoaded);
-
-    }
-    console.log("FINALIZE???")
-   setTimeout(window.Fucker.finalizePlaylist,5000)
-
-}
-
-
-window.Fucker.trackLoaded = function(track,user)
-{
- //   console.log(track)
- console.log(track)
-     if(window.Fucker.model.tracks[user] == null)
-     {
-        window.Fucker.model.tracks[user] = [];
-     } 
-
-    window.Fucker.model.tracks[user].push(track);
-
-    
-}
-
-window.Fucker.finalizePlaylist = function()
-{
-    console.log("FINALIZE")
-    console.log(window.Fucker.model.tracks);
- 
-    var finalArray = [];
-   /* Fucker.model.tracks.forEach(function(tracks){
-        for(var i=0; i < tracks.length; i++)
-            finalArray.push(tracks[i])
-
-    });*/
-    
-    for (var key in window.Fucker.model.tracks) {
-     var obj = window.Fucker.model.tracks[key];
-     for(var i=0; i < obj.length; i++)
-            finalArray.push(obj[i]);
-    }
-
-    console.log(finalArray)
-
-    SPPlayList.init(window.Fucker.model.event.name,finalArray.shuffle());
-    
-
-    /*DONE*/
-
-
-}
-
-Array.prototype.shuffle = function () {
-    for (var i = this.length - 1; i > 0; i--) {
-        var j = Math.floor(Math.random() * (i + 1));
-        var tmp = this[i];
-        this[i] = this[j];
-        this[j] = tmp;
-    }
-
-    return this;
-}
-
-window.Fucker.getUsers = function(eventID){
-    var users  = [];
-    var eventData = {};
-    if (window.Fucker.data == {})
-        return {};
-    console.log(Event.data)
-    window.Fucker.data.forEach(function(fbEvent){
-        if (fbEvent.id ==  eventID) {
-            eventData = fbEvent;
-            window.Fucker.users = eventData.invited.data;
-            return window.Fucker.users;
-        }
-    })
-    return {};
 }
