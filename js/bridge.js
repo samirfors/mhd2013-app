@@ -40,9 +40,9 @@ var Bridge = function (token) {
 	       		var i = 0;
 	        	toplist.results.forEach(function(track) {
 	             	
-	            	if (i < 6) {
-	                	callback(track);
-					}
+
+	             	if(i < 6)
+	                callback(track,user);
 	                i++;
 	            });
 

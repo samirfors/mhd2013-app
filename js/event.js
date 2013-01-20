@@ -3,7 +3,7 @@ window.Fucker =  {}
 window.Fucker.data = {};
 window.Fucker.users = {};
 
-window.Fucker.model = {events:{},spotifyNames:[],tracks:[]};
+window.Fucker.model = {events:{},spotifyNames:[],tracks:{}};
 
 var sp = getSpotifyApi();
 var models = sp.require('$api/models');
@@ -46,7 +46,8 @@ window.Fucker.init = function() {
                 window.Fucker.model.events = response.data;
                 window.Render.eventsList(window.Fucker.model.events);
                 $('.events-list').on('click', '.event .create-playlist', function () {
-                    window.Fucker.createPlaylist(window.Fucker.model.events[$(this).parent().data('index')]);
+                    window.location = 'spotify:app:mhd2013-app:playlist';
+                    window.Fucker.createPlaylist(window.Fucker.model.events[$(this).closest('.event').data('index')]);
                 });
             }
             xhr.send(null);
@@ -62,7 +63,7 @@ window.Fucker.createPlaylist = function(event)
 {
     $('.tracks-list h2').text(event.name);
     $('.tracks-list ul li').remove();
-    event.attending.data.forEach(function (attendee) {
+    event.invited.data.forEach(function (attendee) {
         window.bridge.fbToSpotify(attendee.id, function (user) {
             window.bridge.getTopTracks(user, function (track) {
                 window.Render.addTrack({
@@ -70,12 +71,17 @@ window.Fucker.createPlaylist = function(event)
                     spotify: user,
                     data: track.data
                 });
+    window.Fucker.model.spotifyNames = [];
+    window.Fucker.model.tracks = {};
+   //console.log(event);
+     window.Fucker.model.event = event;
 
             });
         });
     });
 
     window.location = 'spotify:app:mhd2013-app:playlist';
+   setTimeout(window.Fucker.finalizePlaylist,4000)
 
     return;
 }
@@ -86,7 +92,7 @@ window.Fucker.getTopTracks = function(names)
     for(var i = 0; i < names.length; i++)
     {
         console.log(names[i])
-        loadTopTracks(names[i]);
+        loadTopTracks(names[i],i);
     }
     function loadTopTracks(name)
     {
@@ -94,25 +100,52 @@ window.Fucker.getTopTracks = function(names)
         window.bridge.getTopTracks(name,window.Fucker.trackLoaded);
 
     }
-
+    console.log("FINALIZE???")
    setTimeout(window.Fucker.finalizePlaylist,5000)
 
 }
 
 
-window.Fucker.trackLoaded = function(track)
+window.Fucker.trackLoaded = function(track,user)
 {
  //   console.log(track)
-    window.Fucker.model.tracks.push(track);
+ console.log(track)
+     if(window.Fucker.model.tracks[user] == null)
+     {
+        window.Fucker.model.tracks[user] = [];
+     } 
+
+    window.Fucker.model.tracks[user].push(track);
+
+    
 }
 
 window.Fucker.finalizePlaylist = function()
 {
-    for(var i=0; i < window.Fucker.model.tracks.length; i++)
-    {
-          console.log(window.Fucker.model.tracks[i].name);
+    console.log("FINALIZE")
+    console.log(window.Fucker.model.tracks);
+ 
+    var finalArray = [];
+   /* Fucker.model.tracks.forEach(function(tracks){
+        for(var i=0; i < tracks.length; i++)
+            finalArray.push(tracks[i])
+
+    });*/
+    
+    for (var key in window.Fucker.model.tracks) {
+     var obj = window.Fucker.model.tracks[key];
+     for(var i=0; i < obj.length; i++)
+            finalArray.push(obj[i]);
     }
-    SPPlayList.init(window.Fucker.model.event.name,window.Fucker.model.tracks.shuffle());
+
+    console.log(finalArray)
+
+    SPPlayList.init(window.Fucker.model.event.name,finalArray.shuffle());
+    
+
+    /*DONE*/
+
+
 }
 
 Array.prototype.shuffle = function () {
