@@ -99,6 +99,8 @@ window.Fucker.init = function() {
 
 window.Fucker.createPlaylist = function(event)
 {
+    window.Render.startCreating();
+
     $('.tracks-list h2').text(event.name);
     $('.tracks-list ul li').remove();
     window.party = {};
@@ -124,6 +126,7 @@ window.Fucker.createPlaylist = function(event)
             window.Render.addTrack(track);
         });
         SPPlayList.init(event.name, partylist);
+        window.Render.doneCreating(true);
     }, 5000);
 
     window.location = 'spotify:app:mhd2013-app:playlist';
