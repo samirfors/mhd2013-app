@@ -62,33 +62,36 @@ Sort.init = function(data) {
 
 };
 
-window.Fucker.init = function() {
-    var auth = sp.require('$api/auth');
+window.parseEvents = function (response) {
+    console.log('jsonp', arguments);
+    window.Fucker.data = response.data;
 
-    console.log("Here!")
-    var app_id = '465881243471710';
-    var permissions = ['user_actions.music','user_events','friends_actions.music','friends_actions:music','user_actions:music'];
-    var request_url = 'https://graph.facebook.com/events';
+    window.Fucker.model.events = response.data;
+    window.Render.eventsList(window.Fucker.model.events);
+    $('.events-list').on('click', '.event .create-playlist', function () {
+        window.Fucker.createPlaylist(window.Fucker.model.events[$(this).closest('.event').data('index')]);
+    });
+};
+
+window.Fucker.init = function () {
+    console.log("Here!");
+    var auth = sp.require('$api/auth'),
+        app_id = '465881243471710',
+        request_url = 'https://graph.facebook.com/events',
+        permissions = [
+            'user_actions.music', 'user_events', 'friends_actions.music',
+            'friends_actions:music', 'user_actions:music'
+        ];
 
     auth.authenticateWithFacebook(app_id, permissions, {
         onSuccess: function(accessToken, ttl) {
             window.bridge = new Bridge(accessToken);
 
-            var url = 'https://graph.facebook.com/me/events?fields=invited,name,picture&access_token=' + accessToken;
-            var xhr = new XMLHttpRequest();
-            xhr.open('GET', url);
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState != 4) return;
-                var response = JSON.parse(xhr.responseText);
-                window.Fucker.data = response.data;
+            var url = 'https://graph.facebook.com/me/events?fields=invited,name,picture&access_token=' + accessToken + '&callback=parseEvents';
 
-                window.Fucker.model.events = response.data;
-                window.Render.eventsList(window.Fucker.model.events);
-                $('.events-list').on('click', '.event .create-playlist', function () {
-                    window.Fucker.createPlaylist(window.Fucker.model.events[$(this).closest('.event').data('index')]);
-                });
-            }
-            xhr.send(null);
+            var node = document.createElement('script');
+            node.src = url;
+            document.body.appendChild(node);
         },
         onFailure : function(error) {
             console.log('Authentication failed with error: ' + error);
