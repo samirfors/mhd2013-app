@@ -37,12 +37,23 @@ window.Render.eventsList = function(events) {
 }
 
 window.Render.startCreating = function() {
-  $('.create-playlist').attr("disabled", "disabled");
+  $('.main').css({
+    '-webkit-filter':'blur(5px)',
+    'transition-duration': '0.5s'
+  });
+  $('.create-playlist').click(false);
 }
 
 window.Render.doneCreating = function(success) {
   if(success) {
-
+    $('.main').css({
+      '-webkit-filter':'blur(0px)',
+      'transition-duration': '0.5s'
+    });
+    $('.create-playlist').css('cursor', 'pointer');
+    $('.create-playlist').click(function() {
+      window.Fucker.createPlaylist(window.Fucker.model.events[$(this).closest('.event').data('index')]);
+    });
   } else {
     // fail
   }
